@@ -1,27 +1,29 @@
 package com.example.parking.entity;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "person")
 public class Person {
 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id; 
+    private Long id; 
+
+    @OneToMany
+    List<Car> cars = new ArrayList<>();
 
     String name;   
-    Date dob;  
+    String ssn;  
 
-    public Person(String name, Date dob) {
-        this.name = name;      
-        this.dob = dob;
-    }
-    
     public Long getId() {
         return id;
     }
@@ -38,12 +40,20 @@ public class Person {
         this.name = name;
     }
 
-    public Date getDob() {
-        return dob;
+    public String getSsn() {
+        return ssn;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
 
 }
