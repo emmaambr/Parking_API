@@ -14,13 +14,9 @@ public class Time {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    Date startTime;
-    Date endTime;
-
-    public Time(Date startTime, Date endTime) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
+    private Date startTime;
+    private Date endTime;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -44,6 +40,14 @@ public class Time {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
 }
