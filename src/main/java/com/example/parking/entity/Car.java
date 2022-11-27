@@ -1,9 +1,13 @@
 package com.example.parking.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Car {
@@ -12,7 +16,12 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String licensePlate;
+    @Column(name = "Registration number")
+    private String regNumb;
+
+    @ManyToOne
+    @JsonIgnore
+    private Driver driver;
 
     public Long getId() {
         return id;
@@ -22,12 +31,20 @@ public class Car {
         this.id = id;
     } 
 
-    public String getLicensePlate() {
-        return licensePlate;
+    public String getRegNumb() {
+        return regNumb;
     }
 
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
+    public void setRegNumb(String regNumb) {
+        this.regNumb = regNumb;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
 }
