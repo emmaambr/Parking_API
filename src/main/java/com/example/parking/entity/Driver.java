@@ -1,8 +1,8 @@
 package com.example.parking.entity;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,8 +20,8 @@ public class Driver {
     private String name;   
     private String ssn;  
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Car> cars = new HashSet<>();
+    @OneToMany(mappedBy = "driver", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Set<Car> cars;
 
     public Long getId() {
         return id;
@@ -45,14 +45,6 @@ public class Driver {
 
     public void setSsn(String ssn) {
         this.ssn = ssn;
-    }
-
-    public Set<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(Set<Car> cars) {
-        this.cars = cars;
     }
 
 }
