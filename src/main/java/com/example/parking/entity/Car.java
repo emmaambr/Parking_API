@@ -16,7 +16,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Registration number")
+    @Column(name = "Registration number", unique = true)
     private String regNumb;
 
     @ManyToOne
