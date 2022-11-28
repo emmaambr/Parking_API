@@ -27,11 +27,6 @@ public class CarController {
     @Autowired
     DriverService driverService;
 
-    @GetMapping("/car")
-    public List<Car> getCar () {
-        return List.of();
-    }
-
     @GetMapping("/cars")
     public ResponseEntity<List<Car>> getAll() {
             return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
@@ -43,8 +38,7 @@ public class CarController {
     }
 
     @PutMapping("/car/{id}")
-    public ResponseEntity<Car> addDriver(@PathVariable("id") Long carId,
-        @RequestParam(required = true) Long driverId) {
+    public ResponseEntity<Car> addDriver(@PathVariable("id") Long carId, @RequestParam(required = true) Long driverId) {
         Car c = carService.addCarDriver(carId, driverId);
         if (c == null) {
             return ResponseEntity.notFound().build();
