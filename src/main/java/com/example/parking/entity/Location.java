@@ -1,5 +1,8 @@
 package com.example.parking.entity;
 
+import org.geolatte.geom.G2D;
+import org.geolatte.geom.Point;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +15,9 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    // Apply spatial data for this entity
+    private Point<G2D> coordinate;
+
+    private String address; 
 
     public Long getId() {
         return id;
@@ -20,6 +25,22 @@ public class Location {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Point<G2D> getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Point<G2D> coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 }
