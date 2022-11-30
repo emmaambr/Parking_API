@@ -1,6 +1,6 @@
 package com.example.parking.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 
 
 @Entity
-public class Parking {
+public class ParkingEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +25,19 @@ public class Parking {
     @ManyToOne
     private Location location;
 
-    private Date startTime;
-    private Date endTime;
+    private LocalDateTime endTime;
     private boolean active;
+
+    private LocalDateTime startTime;
+
+    public ParkingEvent(LocalDateTime startTime, LocalDateTime endTime, Boolean active, Car car, Driver driver, Location location) {
+        this.driver = driver;
+        this.car = car;
+        this.location = location;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.active = active;
+    }
 
     public Long getId() {
         return id;
@@ -61,19 +71,19 @@ public class Parking {
         this.location = location;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
