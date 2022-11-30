@@ -19,7 +19,11 @@ public class DriverController {
 
     @Autowired
     DriverService driverService;
-     
+
+    public DriverController(DriverService driverService) {
+        this.driverService = driverService;
+    }
+
     @GetMapping("/drivers")
     public ResponseEntity<List<Driver>> getAll() {
             return new ResponseEntity<>(driverService.getAllDrivers(), HttpStatus.OK);
