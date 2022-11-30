@@ -7,6 +7,7 @@ import com.example.parking.entity.Car;
 @Service
 public interface CarService {
   
+    Car getCarById(Long id);
     List<Car> getAllCars(); 
     Car newCar(Car car);
     Car addCarDriver(Long carId, Long driverId);
