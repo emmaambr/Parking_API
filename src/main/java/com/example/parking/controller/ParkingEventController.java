@@ -51,6 +51,16 @@ public class ParkingEventController {
         return new ResponseEntity<>(parkingEventService.getParkingEventById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/parkingevent/active")
+    public List<ParkingEvent> getActiveParkingEvents(@RequestParam String filter) {
+        return parkingEventRepository.filterActive();
+    }
+
+    @GetMapping("/parkingevent/expired")
+    public List<ParkingEvent> getExpiredParkingEvents(@RequestParam String filter) {
+        return parkingEventRepository.filterExpired();
+    }
+
     @PostMapping("/parkingevent")
     public ResponseEntity<ParkingEvent> newParkingEvent(@RequestBody ParkingEvent parkingEvent, 
         @RequestParam(required = true) Long driverId,
@@ -63,6 +73,7 @@ public class ParkingEventController {
         parkingEvent.setCar(car);
         Location location = locationService.getLocationById(locationId);
         parkingEvent.setLocation(location);
+
         LocalDateTime startTime = LocalDateTime.now();
         parkingEvent.setStartTime(startTime);
 
