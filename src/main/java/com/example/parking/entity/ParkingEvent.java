@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
-
 @Entity
 public class ParkingEvent {
 
@@ -27,7 +26,6 @@ public class ParkingEvent {
 
     private LocalDateTime endTime;
     private boolean active;
-
     private LocalDateTime startTime;
 
     public Long getId() {

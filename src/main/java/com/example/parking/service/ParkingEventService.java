@@ -9,5 +9,5 @@ public interface ParkingEventService {
   
     ParkingEvent getParkingEventById(Long id);
     List<ParkingEvent> getAllParkingEvents(); 
-    ParkingEvent newParkingEvent(ParkingEvent parkingEvent); // work in progress
+
 }
