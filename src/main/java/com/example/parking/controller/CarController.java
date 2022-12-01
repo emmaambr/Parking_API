@@ -27,11 +27,6 @@ public class CarController {
     @Autowired
     DriverService driverService;
 
-    public CarController(CarService carService, DriverService driverService) {
-        this.carService = carService;
-        this.driverService = driverService;
-    }
-
     @GetMapping("/cars")
     public ResponseEntity<List<Car>> getAll() {
             return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);

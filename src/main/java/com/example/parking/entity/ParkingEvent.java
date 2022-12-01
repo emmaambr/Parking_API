@@ -30,15 +30,6 @@ public class ParkingEvent {
 
     private LocalDateTime startTime;
 
-    public ParkingEvent(LocalDateTime startTime, LocalDateTime endTime, Boolean active, Car car, Driver driver, Location location) {
-        this.driver = driver;
-        this.car = car;
-        this.location = location;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.active = active;
-    }
-
     public Long getId() {
         return id;
     }

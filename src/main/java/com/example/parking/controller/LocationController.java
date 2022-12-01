@@ -20,11 +20,6 @@ public class LocationController {
     LocationRepository locationRepository;
     LocationService locationService;
 
-    public LocationController(LocationRepository locationRepository, LocationService locationService) {
-        this.locationRepository = locationRepository; 
-        this.locationService = locationService;
-    }
-
     @GetMapping("/locations")
     public ResponseEntity<List<Location>> getAllLocations() {
             return new ResponseEntity<>(locationService.getAllLocations(), HttpStatus.OK);

@@ -20,10 +20,6 @@ public class ParkingEventController {
     @Autowired
     ParkingEventService parkingEventService;
 
-    public ParkingEventController(ParkingEventService parkingEventService) {
-        this.parkingEventService = parkingEventService;
-    }
-
     @GetMapping("/parkingevents")
     public ResponseEntity<List<ParkingEvent>> getAllParkingEvents() {
             return new ResponseEntity<>(parkingEventService.getAllParkingEvents(), HttpStatus.OK);
