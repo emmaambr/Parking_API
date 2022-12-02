@@ -61,8 +61,8 @@ public class ParkingEventController {
         return parkingEventRepository.filterExpired();
     }
 
-    @PostMapping("/parkingevent")
-    public ResponseEntity<ParkingEvent> newParkingEvent(@RequestBody ParkingEvent parkingEvent, 
+    @PostMapping("/parkingevent") 
+    public ResponseEntity<ParkingEvent> newParkingEvent(@RequestBody ParkingEvent parkingEvent, // requestBody contains EndTime 
         @RequestParam(required = true) Long driverId,
         @RequestParam(required = true) Long carId,
         @RequestParam(required = true) Long locationId) {
@@ -76,9 +76,13 @@ public class ParkingEventController {
 
         LocalDateTime startTime = LocalDateTime.now();
         parkingEvent.setStartTime(startTime);
+        parkingEvent.setActive(true);
 
-        var newParkingEvent = parkingEventRepository.save(parkingEvent);
-        return ResponseEntity.ok(newParkingEvent);
+        if(parkingEvent.endTime.isAfter(LocalDateTime.now())) {
+            var newParkingEvent = parkingEventRepository.save(parkingEvent);
+            return ResponseEntity.ok(newParkingEvent);
+        } 
+        return ResponseEntity.badRequest().build();
     }
 
 }
