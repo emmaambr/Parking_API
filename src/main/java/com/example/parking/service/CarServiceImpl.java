@@ -10,6 +10,8 @@ import com.example.parking.entity.Car;
 import com.example.parking.entity.Driver;
 import com.example.parking.repository.CarRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CarServiceImpl implements CarService {
     
@@ -34,7 +36,7 @@ public class CarServiceImpl implements CarService {
         return carRepository.save(car);
     }
 
-    @Override
+    @Transactional
     public Car addCarDriver(Long carId, Long driverId) {
         Optional<Car> carOptional = carRepository.findById(carId);
         Driver driver = driverService.getDriverById(driverId);
