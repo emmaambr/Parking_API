@@ -2,6 +2,7 @@ package com.example.parking.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -89,6 +91,21 @@ public class ParkingEventController {
         return ResponseEntity.badRequest().build();
     }
 
-    // PUT (delay endTime)
+    @PutMapping("/parkingevent/{id}")
+    public ResponseEntity<ParkingEvent> newEndtime(@RequestBody ParkingEvent newTime, @PathVariable("id") Long id) {     
+        Optional<ParkingEvent> parkingEventIdOptional = parkingEventRepository.findById(id);
+        LocalDateTime ldt = newTime.getEndTime();
+
+        if (parkingEventIdOptional.isPresent() && ldt != null) {
+            ParkingEvent p = parkingEventIdOptional.get();
+            p.setEndTime(ldt);
+            p.setActive(true);
+
+            var newParkingEndTime = parkingEventRepository.save(p);
+            return ResponseEntity.ok(newParkingEndTime);
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
 
 }
