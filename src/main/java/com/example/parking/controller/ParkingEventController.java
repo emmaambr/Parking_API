@@ -51,14 +51,9 @@ public class ParkingEventController {
         return new ResponseEntity<>(parkingEventService.getParkingEventById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/parkingevent/active")
-    public List<ParkingEvent> getActiveParkingEvents(@RequestParam String filter) {
-        return parkingEventRepository.filterActive();
-    }
-
-    @GetMapping("/parkingevent/expired")
-    public List<ParkingEvent> getExpiredParkingEvents(@RequestParam String filter) {
-        return parkingEventRepository.filterExpired();
+    @GetMapping("/parkingevent/active/{status}")
+    public List<ParkingEvent> getActiveParkingEvents(@PathVariable Boolean status) {
+        return parkingEventRepository.filterActive(status);
     }
 
     @PostMapping("/parkingevent") 
@@ -66,7 +61,7 @@ public class ParkingEventController {
         @RequestParam(required = true) Long driverId,
         @RequestParam(required = true) Long carId,
         @RequestParam(required = true) Long locationId) {
-          
+
         Driver driver = driverService.getDriverById(driverId);
         parkingEvent.setDriver(driver);
         Car car = carService.getCarById(carId);
@@ -78,7 +73,7 @@ public class ParkingEventController {
         parkingEvent.setStartTime(startTime);
         parkingEvent.setActive(true);
 
-        if(parkingEvent.endTime.isAfter(LocalDateTime.now())) {
+        if(parkingEvent.getEndTime().isAfter(LocalDateTime.now())) {
             var newParkingEvent = parkingEventRepository.save(parkingEvent);
             return ResponseEntity.ok(newParkingEvent);
         } 

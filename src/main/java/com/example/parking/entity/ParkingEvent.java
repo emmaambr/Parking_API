@@ -24,7 +24,7 @@ public class ParkingEvent {
     @ManyToOne
     private Location location;
 
-    public LocalDateTime endTime;
+    private LocalDateTime endTime;
     private boolean active;
     private LocalDateTime startTime;
 
