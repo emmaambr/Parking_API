@@ -59,7 +59,7 @@ public class ParkingEventController {
     }
 
     @GetMapping("/parkingevent/driver/{id}/active/{status}")
-    public List<ParkingEvent> getActiveParkingEvents(@PathVariable Long id, @PathVariable Boolean status) {
+    public List<ParkingEvent> getActiveParkingEventsByDriverId(@PathVariable Long id, @PathVariable Boolean status) {
         LocalDateTime now = LocalDateTime.now();
         parkingEventRepository.updateActive(false, now);
         return parkingEventRepository.filterByActiveDriver(status, id);
@@ -88,5 +88,7 @@ public class ParkingEventController {
         } 
         return ResponseEntity.badRequest().build();
     }
+
+    // PUT (delay endTime)
 
 }
