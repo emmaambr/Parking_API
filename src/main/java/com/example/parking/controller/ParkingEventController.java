@@ -101,8 +101,10 @@ public class ParkingEventController {
             p.setEndTime(ldt);
             p.setActive(true);
 
-            var newParkingEndTime = parkingEventRepository.save(p);
-            return ResponseEntity.ok(newParkingEndTime);
+            if(ldt.isAfter(LocalDateTime.now())) {
+                var newParkingEndTime = parkingEventRepository.save(p);
+                return ResponseEntity.ok(newParkingEndTime);
+            }
         }
 
         return ResponseEntity.badRequest().build();
