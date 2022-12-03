@@ -106,7 +106,6 @@ public class ParkingEventController {
                 return ResponseEntity.ok(newParkingEndTime);
             }
         }
-
         return ResponseEntity.badRequest().build();
     }
 

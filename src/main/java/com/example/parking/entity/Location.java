@@ -16,7 +16,6 @@ public class Location {
     Long id;
 
     private Point<G2D> coordinate;
-
     private String address; 
 
     public Long getId() {
