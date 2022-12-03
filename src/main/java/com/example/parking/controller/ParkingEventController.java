@@ -53,7 +53,12 @@ public class ParkingEventController {
 
     @GetMapping("/parkingevent/active/{status}")
     public List<ParkingEvent> getActiveParkingEvents(@PathVariable Boolean status) {
-        return parkingEventRepository.filterActive(status);
+        return parkingEventRepository.filterByActive(status);
+    }
+
+    @GetMapping("/parkingevent/driver/{id}/active/{status}")
+    public List<ParkingEvent> getActiveParkingEvents(@PathVariable Long id, @PathVariable Boolean status) {
+        return parkingEventRepository.filterByActiveDriver(status, id);
     }
 
     @PostMapping("/parkingevent") 
