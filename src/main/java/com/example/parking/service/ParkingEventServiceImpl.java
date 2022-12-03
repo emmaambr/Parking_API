@@ -1,5 +1,6 @@
 package com.example.parking.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,15 @@ public class ParkingEventServiceImpl implements ParkingEventService {
 
     @Override
     public ParkingEvent getParkingEventById(Long id) {
+        LocalDateTime now = LocalDateTime.now();
+        parkingEventRepository.updateActive(false, now);
         return parkingEventRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<ParkingEvent> getAllParkingEvents() {
+        LocalDateTime now = LocalDateTime.now();
+        parkingEventRepository.updateActive(false, now);
         return (List<ParkingEvent>)parkingEventRepository.findAll();
     }
           

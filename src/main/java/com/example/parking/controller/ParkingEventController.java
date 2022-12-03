@@ -43,7 +43,7 @@ public class ParkingEventController {
 
     @GetMapping("/parkingevents")
     public ResponseEntity<List<ParkingEvent>> getAllParkingEvents() {
-            return new ResponseEntity<>(parkingEventService.getAllParkingEvents(), HttpStatus.OK);
+        return new ResponseEntity<>(parkingEventService.getAllParkingEvents(), HttpStatus.OK);
     }
 
     @GetMapping("/parkingevent/{id}")
@@ -53,16 +53,20 @@ public class ParkingEventController {
 
     @GetMapping("/parkingevent/active/{status}")
     public List<ParkingEvent> getActiveParkingEvents(@PathVariable Boolean status) {
+        LocalDateTime now = LocalDateTime.now();
+        parkingEventRepository.updateActive(false, now);
         return parkingEventRepository.filterByActive(status);
     }
 
     @GetMapping("/parkingevent/driver/{id}/active/{status}")
     public List<ParkingEvent> getActiveParkingEvents(@PathVariable Long id, @PathVariable Boolean status) {
+        LocalDateTime now = LocalDateTime.now();
+        parkingEventRepository.updateActive(false, now);
         return parkingEventRepository.filterByActiveDriver(status, id);
     }
 
     @PostMapping("/parkingevent") 
-    public ResponseEntity<ParkingEvent> newParkingEvent(@RequestBody ParkingEvent parkingEvent, // requestBody contains EndTime 
+    public ResponseEntity<ParkingEvent> newParkingEvent(@RequestBody ParkingEvent parkingEvent,
         @RequestParam(required = true) Long driverId,
         @RequestParam(required = true) Long carId,
         @RequestParam(required = true) Long locationId) {
